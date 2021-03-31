@@ -14,7 +14,7 @@ public class usercontroller {
 	@GetMapping("/")
 	public String getuser() {
 		
-		return "welcome..";
+		return "welcome.. Treeta group spring boot project";
 		
 		
 	}
