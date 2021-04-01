@@ -1,6 +1,7 @@
 package com.example.shoppingcart.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,13 +21,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 
 public class usercontroller {
 
 	@Autowired
 	UserService userService;
-	
+
 	@GetMapping("/hello")
 	public String getHello() {
 		

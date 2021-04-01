@@ -54,6 +54,44 @@
     });
 
 	</script>
+	<script type="text/javascript">
+		// add user
+
+		var socket="localhost:8080";
+
+	$(document).ready(function () {
+	$("#btn-add").click(function (){
+
+			var user={
+
+				"name":$("#name").val(),
+				"age":$("#age").val(),
+				"username":$("#username").val(),
+				"phone":$("#telephone").val(),
+				"password":$("#password").val()
+			};
+
+			var settings={
+				"url":"http://"+socket+"/user/",
+				"method":"POST",
+				"timeout":0,
+				"headers":{
+					"Content-Type":"application/json"
+				},
+				"data":JSON.stringify(user)
+			};
+
+			$.ajax(settings).done(function (data){
+
+ 					alert(data);
+			});
+			
+	});
+
+
+
+	});	
+	</script>
 </head>
 
 <body>
@@ -136,7 +174,7 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button onclick="ajax_submit();" id="bth-search"
+                    <button id="btn-add"
                             class="btn btn-primary btn-lg">Add User
                     </button>
                 </div>
