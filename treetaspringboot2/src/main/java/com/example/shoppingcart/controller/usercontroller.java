@@ -33,6 +33,11 @@ public class usercontroller {
 		
 	}
 	
+	@GetMapping("/")
+	public List<UserObj> getAllUsers(){
+		return userService.getUsers();
+	}
+	
 	@PostMapping("/")
 	public User addUser(@RequestBody User user) {
 	

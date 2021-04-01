@@ -40,5 +40,9 @@ public class UserService {
 		
 		return userRepo.getUserByName(name);
 	}
+	
+	public List<UserObj> getUsers(){
+		return userRepo.getUsersWithoutPassword();
+	}
 
 }

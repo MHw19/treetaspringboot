@@ -14,4 +14,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 
 	@Query("SELECT new com.example.shoppingcart.dto.UserObj(u.id,u.name,u.phone,u.username,u.age) FROM User u WHERE u.name LIKE %?1% ")
 	List<UserObj> getUserByName(String name);
+	
+	@Query("SELECT new com.example.shoppingcart.dto.UserObj(u.id,u.name,u.phone,u.username,u.age) FROM User u ")
+	List<UserObj> getUsersWithoutPassword();
 }
