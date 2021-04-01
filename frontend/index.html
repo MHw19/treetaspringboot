@@ -155,7 +155,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="tab-pane" role="tabpanel" id="tab-3">
+                <div class="tab-pane" role="tabpanel" id="tab-3"  onload="catrgoryload()">
                     <div class="mt-1">
 
                         <button class="btn btn-primary" type="button" data-target="#catModal" data-toggle="modal">Add</button>
@@ -173,14 +173,8 @@
 				    <th></th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-					<th>1</th>
-					<th>Mango</th>
-					<th><input type="text" value="kad jaja" id="des"></th>
-				    <th><button class="btn btn-success btn-sm">Update</button></th>
-				    <th><button class="btn btn-danger btn-sm">Update</button></th>
-                                </tr>
+                                <tbody id="catabody">
+                                
                                 </tbody>
                             </table>
                         </div>
@@ -190,6 +184,7 @@
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
+	<script src="assets/index.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
