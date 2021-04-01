@@ -24,3 +24,4 @@ hs_err_pid*
 
 # Created by Rajitha
 *.properties
+frontend/index.html
