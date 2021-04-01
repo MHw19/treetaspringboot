@@ -18,4 +18,8 @@ public class UserService {
 		
 		return userRepo.findAll();
 	}
+	
+	public User addAUser(User u) {
+		return userRepo.save(u);
+	}
 }
