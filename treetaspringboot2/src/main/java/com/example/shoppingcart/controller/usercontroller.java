@@ -1,6 +1,7 @@
 package com.example.shoppingcart.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,15 +46,20 @@ public class usercontroller {
 	}
 	
 	@PutMapping("/")
-	public void updateUser(@RequestBody User user) {
+	public String updateUser(@RequestBody User user) {
 		
-		userService.updateUser(user);
+		return userService.updateUser(user);
 	}
 	
 	@GetMapping("/getUserByName/{name}")
 	public List<UserObj> getUserByName(@PathVariable String name) {
 		
 		return userService.getUsersByName(name);
+	}
+	
+	@DeleteMapping("{id}")
+	public String deleteUser(@PathVariable int id) {
+		return userService.deleteUser(id);
 	}
 	
 }

@@ -19,9 +19,11 @@ public class UserService {
 		return userRepo.save(user);
 	}
 	
-	public User updateUser(User user) {
+	public String updateUser(User user) {
 		
 		User avlUser= userRepo.findById(user.getId()).orElse(null);
+		
+		String message="";
 		
 		if(avlUser!=null) {
 			avlUser.setAge(user.getAge());
@@ -30,10 +32,12 @@ public class UserService {
 			avlUser.setPhone(user.getPhone());
 			avlUser.setUsername(user.getUsername());
 			
-			avlUser=userRepo.save(avlUser);
+			message="Updated successfully!!";
+		}else {
+			message="No such user";
 		}
 		
-		return avlUser;
+		return message;
 	}
 	
 	public List<UserObj> getUsersByName(String name) {
@@ -43,6 +47,19 @@ public class UserService {
 	
 	public List<UserObj> getUsers(){
 		return userRepo.getUsersWithoutPassword();
+	}
+	
+	public String deleteUser(int id) {
+		User avlUser= userRepo.findById(id).orElse(null);
+		
+		String message="";
+		if(avlUser!=null) {
+			userRepo.delete(avlUser);
+			message="Successfully deleted !!";
+		}else {
+			message="No such User";
+		}
+		return message;
 	}
 
 }
