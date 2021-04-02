@@ -3,6 +3,7 @@ package com.example.shoppingcart.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.example.shoppingcart.service.categoryservice;
 
 @RestController
 @RequestMapping("/mycategory")
+@CrossOrigin(origins = "*",allowedHeaders ="*")
 
 public class productcategorycontroller {
 	
@@ -49,6 +51,16 @@ public class productcategorycontroller {
 		
 		
 	}
+	
+	
+	@GetMapping("/getcatabyid/{Id}")
+	public Category searchbycataid(@PathVariable int Id ){
+		
+		return categoryservice.searchbycataid(Id);
+		
+	}
+	
+	
 	
 	
 	 @DeleteMapping("/deletecataById/{Id}")

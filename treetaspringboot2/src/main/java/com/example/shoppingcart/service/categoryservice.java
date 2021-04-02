@@ -23,6 +23,18 @@ import com.example.shoppingcart.repository.categoryrepository;
 		   
 	   }
 	
+          public Category searchbycataid(int id){
+		   
+		   
+		   return  categoryrepository.findById(id).orElse(null);
+		   
+		   
+	     }
+	
+         
+	   
+	   
+	   
 	
 	   
 	   public Category savecategory(Category category) {
