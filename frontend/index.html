@@ -223,7 +223,7 @@ function updateUser(button){
 	</script>
 </head>
 
-<body onload="catrgoryload();">
+<body onload="catrgoryload();productload();catype();" >
 
     	<div id="accordion" >
   <h3>User</h3>
@@ -321,31 +321,24 @@ function updateUser(button){
   <div>
     <div class="tab-pane" role="tabpanel" id="tab-2">
                     
-                    <span class="ml-2">Search</span><input type="text" class="ml-1" id="search2">
+                    <span class="ml-2">Search</span><input type="text" onkeyup="productsearh();" class="ml-1" id="search2">
                     <div class="table-responsive mt-1">
                         <table class="table">
                             <thead>
                                 <tr>
+								    <th>ID</th>
                                     <th>Product Name</th>
                                     <th>Selling Price</th>
                                     <th>Buying Price</th>
                                     <th>QTY</th>
                                     <th>Description</th>
-                                    <th>Catogory</th>
+                                    
 				    <th></th>
 				    <th></th>
                                 </tr>
                             </thead>
-                            <tbody id="pb">
-                                <tr>
-                                    <td>name</td>
-                                    <td><input type="text" value="145" id="selling"></td>
-                                    <td><input type="text" value="100" id="buying"></td>
-                                    <td><input type="text" value="24" id="qty"></td>
-                                    <td><input type="text" value="dshfjdh" id="des"></td>
-                                    <td>cst</td>
-				    <th><button class="btn btn-success btn-sm">Update</button></th>
-				    <th><button class="btn btn-danger btn-sm">Delete</button></th>
+                            <tbody id="productbody">
+                               
                                 </tr>
                             </tbody>
                         </table>
@@ -387,20 +380,23 @@ function updateUser(button){
             <div class="form-group form-group-lg">
                 <label class="col-sm-2 control-label">Description :</label>
                 <div class="col-sm-5">
-                    <input type="password" class="form-control" id="discription"/>
+                    <input type="text" class="form-control" id="discription"/>
                 </div>
             </div>
 
 	   <div class="form-group form-group-lg">
                 <label class="col-sm-2 control-label">Category :</label>
                 <div class="col-sm-5">
-                    <input type="password" class="form-control" id="category"/>
+                   <select id="cattype" class="">
+				   
+				   
+				   </select>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button onclick="ajax_submit();" id="bth-search"
+                    <button onclick="productadd();" id="bth-search"
                             class="btn btn-primary btn-lg">Add Product
                     </button>
                 </div>
@@ -473,7 +469,7 @@ function updateUser(button){
 </div>
    
 
-<script src="assets/index.js"  type="text/javascript"></script>
+<script src="assets/index.js" type="text/javascript"></script>
 
 
 

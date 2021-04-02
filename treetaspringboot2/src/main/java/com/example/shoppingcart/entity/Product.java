@@ -37,7 +37,7 @@ public class Product implements Serializable {
 	double sellPrice;
 	double qty;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name="category.id")
 	Category category;
 
