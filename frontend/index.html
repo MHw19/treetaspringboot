@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 
 	<script src = "https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+	<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" type="text/javascript"></script>
 	<script>
 
 	$(document).ready(function(){
@@ -81,16 +82,144 @@
 				"data":JSON.stringify(user)
 			};
 
+
 			$.ajax(settings).done(function (data){
 
- 					alert(data);
 			});
 			
 	});
 
+	});
+
+	// load users
+	$(document).ready(function(){
+
+		var settings={
+			"url":"http://"+socket+"/user/",
+			"method":"GET",
+			"Access-Control-Allow-Origin":"*"
+		}
+
+		
+		$.ajax(settings).done(function(data){
+
+			loadTable(data);
+
+		});
+	}
+
+	);
+
+//user search
+
+$(document).ready(function(){
+
+	$("#user-search").keyup(function (){
+
+			var name=$("#user-search").val();
+
+			var settings={
+				"url":"http://"+socket+"/user/getUserByName/"+name,
+				"method":"GET"
+			}
+
+			$.ajax(settings).done(function(data){
 
 
-	});	
+			loadTable(data);
+
+		});
+
+	})
+});
+
+
+
+function loadTable(data){
+
+		var table=document.getElementById('user-table');
+
+		table.innerHTML="";
+
+table.innerHTML="<tr><th>id</th><th>age</th><th>name</th><th>phone</th><th>user name</th><th></th><th></th></tr>"
+
+	for (var i = data.length - 1; i >= 0; i--) {
+		var d=data[i];
+
+		var cell1="<td>"+d["id"]+"</td>";
+
+		var cell2="<td> <input type='number' value='"+d.age+"' /> </td>";
+
+		var cell3="<td> <input type='text' value='"+d.name+"' /> </td>";
+
+		var cell4="<td> <input type='number' value='"+d.phone+"' /> </td>";
+
+		var cell5="<td> <input type='text' value='"+d.username+"' /> </td>";
+
+		var cell6="<td><button class='btn btn-success btn-sm' id='user-update-btn' onclick='updateUser(this)'>Update</button></td>";
+
+		var cell7="<td><button class='btn btn-danger btn-sm' onclick='removeUser("+d.id+")'>Delete</button></td>";
+
+		var tr="<tr>"+cell1+cell2+cell3+cell4+cell5+cell6+cell7+"</tr>";
+			
+		table.innerHTML+=tr;
+			}
+}
+
+// remove users
+
+function removeUser(id){
+	var settings={
+				"url":"http://"+socket+"/user/"+id,
+				"method":"DELETE"
+	}
+
+	$.ajax(settings).done(function(data){
+
+	location.reload();
+	});
+}
+
+// update users
+
+function updateUser(button){
+
+	var td=button.parentNode;
+	var tr=td.parentNode;
+
+	var td=tr.getElementsByTagName("td");
+
+	var ageField=td[1].getElementsByTagName("input");
+	var nameField=td[2].getElementsByTagName("input");
+	var phoneField=td[3].getElementsByTagName("input");
+	var usernameField=td[4].getElementsByTagName("input");
+
+	var user={
+		"id":td[0].innerHTML,
+		"age":ageField[0].value,
+		"name":nameField[0].value,
+		"phone":phoneField[0].value,
+		"username":usernameField[0].value
+	}
+
+	var settings={
+				"url":"http://"+socket+"/user/",
+				"method":"PUT",
+				"timeout":0,
+				"headers":{
+					"Content-Type":"application/json"
+				},
+				"data":JSON.stringify(user)
+	};
+
+	$.ajax(settings).done(function(data){
+
+		alert(data);
+		location.reload();
+	});
+
+}
+	
 	</script>
 </head>
 
@@ -102,10 +231,10 @@
     <div class="tab-pane active" role="tabpanel" id="tab-1">
                     <div class="mt-1">
                        
-                        <span class="ml-2">Search</span><input type="text" class="ml-1" id="search">
+                        <span class="ml-2">Search</span><input type="text" class="ml-1" id="user-search">
                     </div>
                     <div class="table-responsive mt-1">
-                        <table class="table">
+                        <table class="table" id="user-table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -120,10 +249,10 @@
                             <tbody id="tb">
                                 <tr>
                                     <td>1</td>
-                                    <td><input type="text" value="Name" id="uname"></td>
-				    <th><input type="text" value="024334" id="mobile"></th>
+                                    <td><input type="text" id="uname"></td>
+				    <th><input type="text" id="mobile"></th>
 				    <th>pasi</th>
-				    <th><input type="text" value="24" id="age"></th>
+				    <th><input type="text" id="age"></th>
 				    <th><button class="btn btn-success btn-sm">Update</button></th>
 				    <th><button class="btn btn-danger btn-sm">Delete</button></th>
                                 </tr>
