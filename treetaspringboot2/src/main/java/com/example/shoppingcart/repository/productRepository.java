@@ -8,5 +8,5 @@ import com.example.shoppingcart.entity.Product;
 
 @Repository
 public interface productRepository extends JpaRepository<Product,Integer> {
-
+ //he
 }

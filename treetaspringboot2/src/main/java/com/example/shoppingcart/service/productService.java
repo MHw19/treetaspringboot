@@ -19,6 +19,7 @@ public class productService {
 
     public Product addProduct(Product product) {
         return productRepository.save(product);
+        //ser
     }
 
     public String deleteProduct(int id) {
