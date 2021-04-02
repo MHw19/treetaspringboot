@@ -223,9 +223,9 @@ function updateUser(button){
 	</script>
 </head>
 
-<body>
+<body onload="catrgoryload();">
 
-    	<div id="accordion">
+    	<div id="accordion" >
   <h3>User</h3>
   <div>
     <div class="tab-pane active" role="tabpanel" id="tab-1">
@@ -412,13 +412,13 @@ function updateUser(button){
 
   </div>
   <h3>Category</h3>
-  <div>
-    		               <div class="tab-pane" role="tabpanel" id="tab-3">
-                    <div class="mt-1">
-                        <span class="ml-2">Search</span><input type="text" class="ml-1" id="searchCat">
+  <div >
+    		               <div   class="tab-pane" role="tabpanel" id="tab-3">
+                    <div   class="mt-1">
+                        <span class="ml-2">Search</span><input type="text"  onkeyup="categorysearh();" class="ml-1" id="searchCat">
+                         
 
-
-                        <div class="table-responsive mt-1">
+                        <div  class="table-responsive mt-1">
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -429,14 +429,8 @@ function updateUser(button){
 				    <th></th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-					<th>1</th>
-					<th>Mango</th>
-					<th><input type="text" value="kad jaja" id="des"></th>
-				    <th><button class="btn btn-success btn-sm">Update</button></th>
-				    <th><button class="btn btn-danger btn-sm">Delete</button></th>
-                                </tr>
+                                <tbody id="catabody">
+                  
                                 </tbody>
                             </table>
                         </div>
@@ -464,7 +458,7 @@ function updateUser(button){
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button onclick="ajax_submit();" id="bth-search"
+                    <button onclick="categoryadd();" id="bth-search"
                             class="btn btn-primary btn-lg">Add Category
                     </button>
                 </div>
@@ -478,6 +472,10 @@ function updateUser(button){
 
 </div>
    
+
+<script src="assets/index.js"  type="text/javascript"></script>
+
+
 
 </body>
 
