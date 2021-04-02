@@ -32,6 +32,7 @@ public class UserService {
 			avlUser.setPhone(user.getPhone());
 			avlUser.setUsername(user.getUsername());
 			
+			userRepo.save(avlUser);
 			message="Updated successfully!!";
 		}else {
 			message="No such user";
