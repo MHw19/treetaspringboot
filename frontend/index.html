@@ -84,7 +84,7 @@
 
 
 			$.ajax(settings).done(function (data){
-
+				loadAllData();
 			});
 			
 	});
@@ -100,7 +100,6 @@
 			"Access-Control-Allow-Origin":"*"
 		}
 
-		
 		$.ajax(settings).done(function(data){
 
 			loadTable(data);
@@ -117,18 +116,24 @@ $(document).ready(function(){
 	$("#user-search").keyup(function (){
 
 			var name=$("#user-search").val();
+			
+			
+			if(name===""){
+				loadAllData();
+			}else{
+				var settings={
+					"url":"http://"+socket+"/user/getUserByName/"+name,
+					"method":"GET"
+				}
 
-			var settings={
-				"url":"http://"+socket+"/user/getUserByName/"+name,
-				"method":"GET"
+				$.ajax(settings).done(function(data){
+
+
+				loadTable(data);
+
+			});			
+			
 			}
-
-			$.ajax(settings).done(function(data){
-
-
-			loadTable(data);
-
-		});
 
 	})
 });
@@ -218,6 +223,22 @@ function updateUser(button){
 		location.reload();
 	});
 
+}
+
+function loadAllData(){
+
+		var settings={
+			"url":"http://"+socket+"/user/",
+			"method":"GET",
+			"Access-Control-Allow-Origin":"*"
+		}
+
+		$.ajax(settings).done(function(data){
+
+
+			loadTable(data);
+
+		});
 }
 	
 	</script>
