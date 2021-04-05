@@ -19,6 +19,19 @@ public class UserService {
 		return userRepo.save(user);
 	}
 	
+	
+	 public User getByuserNamePassword(String name,String password) {
+		 
+		 
+		 return userRepo.getByuserNamePassword(name, password);
+		 
+	 }
+	 
+	 
+	 
+	 
+	
+	
 	public String updateUser(User user) {
 		
 		User avlUser= userRepo.findById(user.getId()).orElse(null);
