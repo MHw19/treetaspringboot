@@ -42,7 +42,9 @@ public class JwtAuthenticationController {
 
 		
 		pw=authenticationRequest.getPassword();
-		System.out.println("password"+pw);
+
+		//System.out.println("password"+pw);
+
 		authenticate(authenticationRequest.getUsername(),authenticationRequest.getPassword());
 
 		
