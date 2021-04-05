@@ -20,9 +20,6 @@ import com.example.shoppingcart.config.JwtTokenUtil;
 import com.example.shoppingcart.entity.JwtRequest;
 import com.example.shoppingcart.entity.JwtResponse;
 
-
-
-
 @RestController
 @CrossOrigin
 public class JwtAuthenticationController {
@@ -45,7 +42,9 @@ public class JwtAuthenticationController {
 
 		
 		pw=authenticationRequest.getPassword();
+
 		//System.out.println("password"+pw);
+
 		authenticate(authenticationRequest.getUsername(),authenticationRequest.getPassword());
 
 		
