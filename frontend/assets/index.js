@@ -16,7 +16,7 @@
                                             var users = JSON.parse(resp);
                                             for (var i = 0; i < users.length; i++) {
                                                 var u = users[i];
-                                                tbody.innerHTML += "<tr id=\"tr-" + u["id"] + "\">" +
+                                                tbody.innerHTML += "<tr id=\"trs-" + u["id"] + "\">" +
                                                         "<td>" + u["id"] + "</td>" +
                                                         "<td><input type=\"text\" value=\"" + u["catname"] + "\"></td>" +
                                                         "<td><input type=\"text\" value=\"" + u["description"] + "\"></td>" +
@@ -26,7 +26,7 @@
                                             }
                                         }
                                     };
-                                    req.open("GET", "http://localhost:8080/mycategory/getcata", true);
+                                    req.open("GET", "https://rajitha.live:8080/mycategory/getcata", true);
                                     req.send();
     
 	   
@@ -99,7 +99,7 @@
                                             }
                                         }
                                     };
-                                    req.open("GET", "http://localhost:8080/products/getProduct", true);
+                                    req.open("GET", "https://rajitha.live:8080/products/getProduct", true);
                                     req.send();
     
 	   
@@ -151,7 +151,7 @@
                                             tbody.innerHTML = "";
                                             var u = JSON.parse(resp);
                                            
-                                                tbody.innerHTML += "<tr id=\"tr-" + u["id"] + "\">" +
+                                                tbody.innerHTML += "<tr id=\"trs-" + u["id"] + "\">" +
                                                         "<td>" + u["id"] + "</td>" +
                                                         "<td><input type=\"text\" value=\"" + u["catname"] + "\"></td>" +
                                                         "<td><input type=\"text\" value=\"" + u["description"] + "\"></td>" +
@@ -161,7 +161,7 @@
                                             
                                         }
                                     };
-                                    req.open("GET", "http://localhost:8080/mycategory/getcatabyid/"+keyword, true);
+                                    req.open("GET", "https://rajitha.live:8080/mycategory/getcatabyid/"+keyword, true);
                                     req.send();
 			 
 		 }
@@ -223,7 +223,7 @@
                                             
                                         }
                                     };
-                                    req.open("GET", "http://localhost:8080/products/searchbyprdid/"+keyword, true);
+                                    req.open("GET", "https://rajitha.live:8080/products/searchbyprdid/"+keyword, true);
                                     req.send();
 			 
 		 }
@@ -270,7 +270,7 @@
                                             alert(resp);
                                         }
                                     };
-                                    req.open("DELETE","http://localhost:8080/mycategory/deletecataById/"+id, true);
+                                    req.open("DELETE","https://rajitha.live:8080/mycategory/deletecataById/"+id, true);
                                     req.send();
     
     
@@ -305,7 +305,7 @@
                                             alert(resp);
                                         }
                                     };
-                                    req.open("DELETE","http://localhost:8080/products/deleteProduct/"+id, true);
+                                    req.open("DELETE","https://rajitha.live:8080/products/deleteProduct/"+id, true);
                                     req.send();
     
     
@@ -340,7 +340,7 @@
    function categoryupdate(Id){ 
     
     
-    var tr=document.getElementById("tr-"+Id);
+    var tr=document.getElementById("trs-"+Id);
     var u={};
     u["id"]=Id;
     u["catname"]=tr.cells[1].getElementsByTagName("input")[0].value;
@@ -357,7 +357,7 @@
                                           
                                         }
                                     };
-                                    req.open("PUT", "http://localhost:8080/mycategory/upadtecategory", true);
+                                    req.open("PUT", "https://rajitha.live:8080/mycategory/upadtecategory", true);
                                     req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                                     req.send(JSON.stringify(u));
     
@@ -373,8 +373,8 @@
     var u={};
     u["id"]=Id;
     u["productname"]=tr.cells[1].getElementsByTagName("input")[0].value;
-    u["sellprice"]=tr.cells[2].getElementsByTagName("input")[0].value;
-    u["buyprice"]=tr.cells[3].getElementsByTagName("input")[0].value;
+    u["sellPrice"]=tr.cells[2].getElementsByTagName("input")[0].value;
+    u["buyPrice"]=tr.cells[3].getElementsByTagName("input")[0].value;
 	u["qty"]=tr.cells[4].getElementsByTagName("input")[0].value;
 	u["description"]=tr.cells[5].getElementsByTagName("input")[0].value;
     
@@ -388,7 +388,7 @@
                                           
                                         }
                                     };
-                                    req.open("PUT", "http://localhost:8080/products/updateProduct", true);
+                                    req.open("PUT", "https://rajitha.live:8080/products/updateProduct", true);
                                     req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                                     req.send(JSON.stringify(u));
     
@@ -425,7 +425,7 @@
                                             if(resp !=null){
                                                 
                                                alert("sucess");
-                                               window.location.reload();
+                                               catrgoryload();
                                             }
                                              
                                         }
@@ -433,7 +433,7 @@
                                     
                                     var para="catname="+catname+"&description="+description;
                                     
-                                    req.open("POST", "http://localhost:8080/mycategory/savecategory", true);
+                                    req.open("POST", "https://rajitha.live:8080/mycategory/savecategory", true);
                                     
                                     req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                                     req.send(para);
@@ -469,7 +469,7 @@
                                             }
                                         }
                                     };
-                                   req.open("GET","http://localhost:8080/mycategory/getcata", true);
+                                   req.open("GET","https://rajitha.live:8080/mycategory/getcata", true);
                                     req.send();
     
 	   
@@ -526,7 +526,7 @@
                                     
                                     var para="productname="+productname+"&description="+description+"&buyPrice="+buyingprice+"&sellPrice="+sellingprice+"&qty="+qty+"&category="+cattype;
                                     
-                                    req.open("POST", "http://localhost:8080/products/addProduct", true);
+                                    req.open("POST", "https://rajitha.live:8080/products/addProduct", true);
                                     
                                     req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                                     req.send(para);

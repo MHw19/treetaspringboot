@@ -58,7 +58,7 @@
 	<script type="text/javascript">
 		// add user
 
-		var socket="localhost:8080";
+		var socket="rajitha.live:8080";
 
 	$(document).ready(function () {
 	$("#btn-add").click(function (){
@@ -73,7 +73,7 @@
 			};
 
 			var settings={
-				"url":"http://"+socket+"/user/",
+				"url":"https://"+socket+"/user/",
 				"method":"POST",
 				"timeout":0,
 				"headers":{
@@ -84,7 +84,7 @@
 
 
 			$.ajax(settings).done(function (data){
-
+				loadAllData();
 			});
 			
 	});
@@ -95,12 +95,11 @@
 	$(document).ready(function(){
 
 		var settings={
-			"url":"http://"+socket+"/user/",
+			"url":"https://"+socket+"/user/",
 			"method":"GET",
 			"Access-Control-Allow-Origin":"*"
 		}
 
-		
 		$.ajax(settings).done(function(data){
 
 			loadTable(data);
@@ -117,18 +116,24 @@ $(document).ready(function(){
 	$("#user-search").keyup(function (){
 
 			var name=$("#user-search").val();
+			
+			
+			if(name===""){
+				loadAllData();
+			}else{
+				var settings={
+					"url":"https://"+socket+"/user/getUserByName/"+name,
+					"method":"GET"
+				}
 
-			var settings={
-				"url":"http://"+socket+"/user/getUserByName/"+name,
-				"method":"GET"
+				$.ajax(settings).done(function(data){
+
+
+				loadTable(data);
+
+			});			
+			
 			}
-
-			$.ajax(settings).done(function(data){
-
-
-			loadTable(data);
-
-		});
 
 	})
 });
@@ -170,7 +175,7 @@ table.innerHTML="<tr><th>id</th><th>age</th><th>name</th><th>phone</th><th>user 
 
 function removeUser(id){
 	var settings={
-				"url":"http://"+socket+"/user/"+id,
+				"url":"https://"+socket+"/user/"+id,
 				"method":"DELETE"
 	}
 
@@ -203,7 +208,7 @@ function updateUser(button){
 	}
 
 	var settings={
-				"url":"http://"+socket+"/user/",
+				"url":"https://"+socket+"/user/",
 				"method":"PUT",
 				"timeout":0,
 				"headers":{
@@ -218,6 +223,22 @@ function updateUser(button){
 		location.reload();
 	});
 
+}
+
+function loadAllData(){
+
+		var settings={
+			"url":"https://"+socket+"/user/",
+			"method":"GET",
+			"Access-Control-Allow-Origin":"*"
+		}
+
+		$.ajax(settings).done(function(data){
+
+
+			loadTable(data);
+
+		});
 }
 	
 	</script>
