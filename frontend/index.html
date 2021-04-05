@@ -58,7 +58,7 @@
 	<script type="text/javascript">
 		// add user
 
-		var socket="localhost:8080";
+		var socket="rajitha.live:8080";
 
 	$(document).ready(function () {
 	$("#btn-add").click(function (){
@@ -73,7 +73,7 @@
 			};
 
 			var settings={
-				"url":"http://"+socket+"/user/",
+				"url":"https://"+socket+"/user/",
 				"method":"POST",
 				"timeout":0,
 				"headers":{
@@ -95,7 +95,7 @@
 	$(document).ready(function(){
 
 		var settings={
-			"url":"http://"+socket+"/user/",
+			"url":"https://"+socket+"/user/",
 			"method":"GET",
 			"Access-Control-Allow-Origin":"*"
 		}
@@ -122,7 +122,7 @@ $(document).ready(function(){
 				loadAllData();
 			}else{
 				var settings={
-					"url":"http://"+socket+"/user/getUserByName/"+name,
+					"url":"https://"+socket+"/user/getUserByName/"+name,
 					"method":"GET"
 				}
 
@@ -175,7 +175,7 @@ table.innerHTML="<tr><th>id</th><th>age</th><th>name</th><th>phone</th><th>user 
 
 function removeUser(id){
 	var settings={
-				"url":"http://"+socket+"/user/"+id,
+				"url":"https://"+socket+"/user/"+id,
 				"method":"DELETE"
 	}
 
@@ -208,7 +208,7 @@ function updateUser(button){
 	}
 
 	var settings={
-				"url":"http://"+socket+"/user/",
+				"url":"https://"+socket+"/user/",
 				"method":"PUT",
 				"timeout":0,
 				"headers":{
@@ -228,7 +228,7 @@ function updateUser(button){
 function loadAllData(){
 
 		var settings={
-			"url":"http://"+socket+"/user/",
+			"url":"https://"+socket+"/user/",
 			"method":"GET",
 			"Access-Control-Allow-Origin":"*"
 		}
