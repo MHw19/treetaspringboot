@@ -25,7 +25,6 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	
 	<script type="text/javascript">
-	
 	function login(){
 	
 	var name=document.getElementById("name").value;
@@ -34,7 +33,7 @@
 	var login={
 		"username":name,
 		"password":password
-	}
+	};
 	
 	var request=new XMLHttpRequest();
 	request.onreadystatechange=function(){
@@ -43,18 +42,30 @@
 			
 			var response=request.responseText;
 			// response
-			alert(response);
+			
+			var obj=JSON.parse(response);
+			
+			//alert(obj.token);
+			
+			localStorage.setItem("token", "Bearer"+obj.token);
+			
+			window.location="index.html";
+			}
+			
+			if(request.status===401){
+			
+				alert("Invalid login");
 			}
 		}
 	}
-
 	
 	request.open("POST","http://localhost:8080/authenticate",true); // provide the URL
-	request.setRequestHeader('Content-type', 'application/JSON;charset=UTF-8');
 
+	request.setRequestHeader('Content-type', 'application/JSON;charset=UTF-8');
 	request.send(JSON.stringify(login));
-	}
 	
+	}
+
 	</script>
 </body>
 

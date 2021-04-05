@@ -73,7 +73,7 @@
 			};
 
 			var settings={
-				"url":"https://"+socket+"/user/",
+				"url":"http://"+socket+"/user/",
 				"method":"POST",
 				"timeout":0,
 				"headers":{
@@ -94,8 +94,13 @@
 	// load users
 	$(document).ready(function(){
 
+	var tok=localStorage.getItem("token");
+
+	alert(tok);
+	console.log(tok);
+
 		var settings={
-			"url":"https://"+socket+"/user/",
+			"url":"http://"+socket+"/user/",
 			"method":"GET",
 			"Access-Control-Allow-Origin":"*"
 		}
@@ -122,7 +127,7 @@ $(document).ready(function(){
 				loadAllData();
 			}else{
 				var settings={
-					"url":"https://"+socket+"/user/getUserByName/"+name,
+					"url":"http://"+socket+"/user/getUserByName/"+name,
 					"method":"GET"
 				}
 
@@ -175,7 +180,7 @@ table.innerHTML="<tr><th>id</th><th>age</th><th>name</th><th>phone</th><th>user 
 
 function removeUser(id){
 	var settings={
-				"url":"https://"+socket+"/user/"+id,
+				"url":"http://"+socket+"/user/"+id,
 				"method":"DELETE"
 	}
 
@@ -208,7 +213,7 @@ function updateUser(button){
 	}
 
 	var settings={
-				"url":"https://"+socket+"/user/",
+				"url":"http://"+socket+"/user/",
 				"method":"PUT",
 				"timeout":0,
 				"headers":{
@@ -228,7 +233,7 @@ function updateUser(button){
 function loadAllData(){
 
 		var settings={
-			"url":"https://"+socket+"/user/",
+			"url":"http://"+socket+"/user/",
 			"method":"GET",
 			"Access-Control-Allow-Origin":"*"
 		}
