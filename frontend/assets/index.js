@@ -26,7 +26,7 @@
                                             }
                                         }
                                     };
-                                    req.open("GET", "http://localhost:8080/mycategory/getcata", true);
+                                    req.open("GET", "https://rajitha.live:8080/mycategory/getcata", true);
                                     req.send();
     
 	   
@@ -99,7 +99,7 @@
                                             }
                                         }
                                     };
-                                    req.open("GET", "http://localhost:8080/products/getProduct", true);
+                                    req.open("GET", "https://rajitha.live:8080/products/getProduct", true);
                                     req.send();
     
 	   
@@ -161,7 +161,7 @@
                                             
                                         }
                                     };
-                                    req.open("GET", "http://localhost:8080/mycategory/getcatabyid/"+keyword, true);
+                                    req.open("GET", "https://rajitha.live:8080/mycategory/getcatabyid/"+keyword, true);
                                     req.send();
 			 
 		 }
@@ -223,7 +223,7 @@
                                             
                                         }
                                     };
-                                    req.open("GET", "http://localhost:8080/products/searchbyprdid/"+keyword, true);
+                                    req.open("GET", "https://rajitha.live:8080/products/searchbyprdid/"+keyword, true);
                                     req.send();
 			 
 		 }
@@ -270,7 +270,7 @@
                                             alert(resp);
                                         }
                                     };
-                                    req.open("DELETE","http://localhost:8080/mycategory/deletecataById/"+id, true);
+                                    req.open("DELETE","https://rajitha.live:8080/mycategory/deletecataById/"+id, true);
                                     req.send();
     
     
@@ -305,7 +305,7 @@
                                             alert(resp);
                                         }
                                     };
-                                    req.open("DELETE","http://localhost:8080/products/deleteProduct/"+id, true);
+                                    req.open("DELETE","https://rajitha.live:8080/products/deleteProduct/"+id, true);
                                     req.send();
     
     
@@ -357,7 +357,7 @@
                                           
                                         }
                                     };
-                                    req.open("PUT", "http://localhost:8080/mycategory/upadtecategory", true);
+                                    req.open("PUT", "https://rajitha.live:8080/mycategory/upadtecategory", true);
                                     req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                                     req.send(JSON.stringify(u));
     
@@ -388,7 +388,7 @@
                                           
                                         }
                                     };
-                                    req.open("PUT", "http://localhost:8080/products/updateProduct", true);
+                                    req.open("PUT", "https://rajitha.live:8080/products/updateProduct", true);
                                     req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                                     req.send(JSON.stringify(u));
     
@@ -433,7 +433,7 @@
                                     
                                     var para="catname="+catname+"&description="+description;
                                     
-                                    req.open("POST", "http://localhost:8080/mycategory/savecategory", true);
+                                    req.open("POST", "https://rajitha.live:8080/mycategory/savecategory", true);
                                     
                                     req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                                     req.send(para);
@@ -469,7 +469,7 @@
                                             }
                                         }
                                     };
-                                   req.open("GET","http://localhost:8080/mycategory/getcata", true);
+                                   req.open("GET","https://rajitha.live:8080/mycategory/getcata", true);
                                     req.send();
     
 	   
@@ -526,7 +526,7 @@
                                     
                                     var para="productname="+productname+"&description="+description+"&buyPrice="+buyingprice+"&sellPrice="+sellingprice+"&qty="+qty+"&category="+cattype;
                                     
-                                    req.open("POST", "http://localhost:8080/products/addProduct", true);
+                                    req.open("POST", "https://rajitha.live:8080/products/addProduct", true);
                                     
                                     req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                                     req.send(para);
