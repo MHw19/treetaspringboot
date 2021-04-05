@@ -50,7 +50,8 @@
 
 	
 	request.open("POST","http://localhost:8080/authenticate",true); // provide the URL
-	request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+	request.setRequestHeader('Content-type', 'application/JSON;charset=UTF-8');
+
 	request.send(JSON.stringify(login));
 	}
 	
