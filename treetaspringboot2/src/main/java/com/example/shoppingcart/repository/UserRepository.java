@@ -17,4 +17,9 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	@Query("SELECT new com.example.shoppingcart.dto.UserObj(u.id,u.name,u.phone,u.username,u.age) FROM User u ")
 	List<UserObj> getUsersWithoutPassword();
+	
+	@Query("SELECT u FROM User u WHERE u.username=?1 AND u.password=?2")
+	User  getByuserNamePassword(String name,String password);
+	
+	
 }
