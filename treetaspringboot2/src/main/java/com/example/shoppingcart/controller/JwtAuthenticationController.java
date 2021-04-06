@@ -41,7 +41,7 @@ public class JwtAuthenticationController {
 			throws Exception {
 		
 		pw=authenticationRequest.getPassword();
-		
+
 		authenticate(authenticationRequest.getUsername(),authenticationRequest.getPassword());
 
 		final UserDetails userDetails = jwtInMemoryUserDetailsService
