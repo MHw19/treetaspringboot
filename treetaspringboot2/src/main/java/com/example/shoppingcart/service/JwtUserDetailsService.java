@@ -31,10 +31,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		String encodedPw= encoder.encode(JwtAuthenticationController.pw);
 		
 		if (u !=null) {
-			
-			System.out.println("username"+u.getUsername());
-			
-			return new User("javainuse",encodedPw,
+			return new User(u.getUsername(),encodedPw,
 					new ArrayList<>());
 		} else {
 			throw new UsernameNotFoundException("User not found with username: " + username);

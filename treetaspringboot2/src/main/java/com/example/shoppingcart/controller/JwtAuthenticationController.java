@@ -39,21 +39,14 @@ public class JwtAuthenticationController {
 	@RequestMapping(value ="/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
 			throws Exception {
-
 		
 		pw=authenticationRequest.getPassword();
 
-		//System.out.println("password"+pw);
-
 		authenticate(authenticationRequest.getUsername(),authenticationRequest.getPassword());
 
-		
-		
-		
-		
 		final UserDetails userDetails = jwtInMemoryUserDetailsService
 				.loadUserByUsername(authenticationRequest.getUsername());
-
+		
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
 		return ResponseEntity.ok(new JwtResponse(token));

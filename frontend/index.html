@@ -4,501 +4,69 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>IndexPage</title>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <title>treeta-codefest</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-
-	<script src = "https://code.jquery.com/jquery-3.6.0.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" type="text/javascript"></script>
-	<script>
-
-	$(document).ready(function(){
-           
-		$( "#accordion" ).accordion();
-
-		$( "#dialog" ).dialog({
-      autoOpen: false,
-      show: {
-        effect: "blind",
-        duration: 1000
-      },
-      hide: {
-        effect: "explode",
-        duration: 1000
-      }
-    });
- 
-    $( "#opener" ).on( "click", function() {
-      $( "#dialog" ).dialog( "open" );
-    });
-
-	});
-
- dialog = $( "#dialog-form" ).dialog({
-      autoOpen: false,
-      height: 400,
-      width: 350,
-      modal: true,
-      buttons: {
-        "Create an account": addUser,
-        Cancel: function() {
-          dialog.dialog( "close" );
-        }
-      },
-      close: function() {
-        form[ 0 ].reset();
-        allFields.removeClass( "ui-state-error" );
-      }
-    });
-
-	</script>
-	<script type="text/javascript">
-		// add user
-
-		var socket="rajitha.live:8080";
-
-	$(document).ready(function () {
-	$("#btn-add").click(function (){
-
-			var user={
-
-				"name":$("#name").val(),
-				"age":$("#age").val(),
-				"username":$("#username").val(),
-				"phone":$("#telephone").val(),
-				"password":$("#password").val()
-			};
-
-			var settings={
-				"url":"http://"+socket+"/user/",
-				"method":"POST",
-				"timeout":0,
-				"headers":{
-					"Content-Type":"application/json"
-				},
-				"data":JSON.stringify(user)
-			};
-
-
-			$.ajax(settings).done(function (data){
-				loadAllData();
-			});
-			
-	});
-
-	});
-
-	// load users
-	$(document).ready(function(){
-
-	var tok=localStorage.getItem("token");
-
-	alert(tok);
-	console.log(tok);
-
-		var settings={
-			"url":"http://"+socket+"/user/",
-			"method":"GET",
-			"Access-Control-Allow-Origin":"*"
-		}
-
-		$.ajax(settings).done(function(data){
-
-			loadTable(data);
-
-		});
-	}
-
-	);
-
-//user search
-
-$(document).ready(function(){
-
-	$("#user-search").keyup(function (){
-
-			var name=$("#user-search").val();
-			
-			
-			if(name===""){
-				loadAllData();
-			}else{
-				var settings={
-					"url":"http://"+socket+"/user/getUserByName/"+name,
-					"method":"GET"
-				}
-
-				$.ajax(settings).done(function(data){
-
-
-				loadTable(data);
-
-			});			
-			
-			}
-
-	})
-});
-
-
-
-function loadTable(data){
-
-		var table=document.getElementById('user-table');
-
-		table.innerHTML="";
-
-table.innerHTML="<tr><th>id</th><th>age</th><th>name</th><th>phone</th><th>user name</th><th></th><th></th></tr>"
-
-	for (var i = data.length - 1; i >= 0; i--) {
-		var d=data[i];
-
-		var cell1="<td>"+d["id"]+"</td>";
-
-		var cell2="<td> <input type='number' value='"+d.age+"' /> </td>";
-
-		var cell3="<td> <input type='text' value='"+d.name+"' /> </td>";
-
-		var cell4="<td> <input type='number' value='"+d.phone+"' /> </td>";
-
-		var cell5="<td> <input type='text' value='"+d.username+"' /> </td>";
-
-		var cell6="<td><button class='btn btn-success btn-sm' id='user-update-btn' onclick='updateUser(this)'>Update</button></td>";
-
-		var cell7="<td><button class='btn btn-danger btn-sm' onclick='removeUser("+d.id+")'>Delete</button></td>";
-
-		var tr="<tr>"+cell1+cell2+cell3+cell4+cell5+cell6+cell7+"</tr>";
-			
-		table.innerHTML+=tr;
-			}
-}
-
-// remove users
-
-function removeUser(id){
-	var settings={
-				"url":"http://"+socket+"/user/"+id,
-				"method":"DELETE"
-	}
-
-	$.ajax(settings).done(function(data){
-
-	location.reload();
-	});
-}
-
-// update users
-
-function updateUser(button){
-
-	var td=button.parentNode;
-	var tr=td.parentNode;
-
-	var td=tr.getElementsByTagName("td");
-
-	var ageField=td[1].getElementsByTagName("input");
-	var nameField=td[2].getElementsByTagName("input");
-	var phoneField=td[3].getElementsByTagName("input");
-	var usernameField=td[4].getElementsByTagName("input");
-
-	var user={
-		"id":td[0].innerHTML,
-		"age":ageField[0].value,
-		"name":nameField[0].value,
-		"phone":phoneField[0].value,
-		"username":usernameField[0].value
-	}
-
-	var settings={
-				"url":"http://"+socket+"/user/",
-				"method":"PUT",
-				"timeout":0,
-				"headers":{
-					"Content-Type":"application/json"
-				},
-				"data":JSON.stringify(user)
-	};
-
-	$.ajax(settings).done(function(data){
-
-		alert(data);
-		location.reload();
-	});
-
-}
-
-function loadAllData(){
-
-		var settings={
-			"url":"http://"+socket+"/user/",
-			"method":"GET",
-			"Access-Control-Allow-Origin":"*"
-		}
-
-		$.ajax(settings).done(function(data){
-
-
-			loadTable(data);
-
-		});
-}
-	
-	</script>
 </head>
 
-<body onload="catrgoryload();productload();catype();" >
+<body>
+    <section class="login-dark">
+        <form method="post">
+            <h2 class="sr-only">Login Form</h2>
+            <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+            <div class="form-group"><input class="form-control" type="text" id="name" placeholder="Username"></div>
+            <div class="form-group"><input class="form-control" type="password" id="password" placeholder="Password"></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="button" onclick="login();" >Log In</button></div><a class="forgot" href="#">Forgot your email or password?</a>
+        </form>
+    </section>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
+	function login(){
+	
+	var name=document.getElementById("name").value;
+	var password=document.getElementById("password").value;
+	
+	var login={
+		"username":name,
+		"password":password
+	};
+	
+	var request=new XMLHttpRequest();
+	request.onreadystatechange=function(){
+		if(request.readyState == 4){		
+			if(request.status == 200){
+			
+			var response=request.responseText;
+			// response
+			
+			var obj=JSON.parse(response);
+			
+			//alert(obj.token);
+			
+			localStorage.setItem("token", "Bearer "+obj.token);
+			
+			window.location="home.html";
+			}
+			
+			if(request.status===401){
+			
+				alert("Invalid login");
+			}
+		}
+	}
+	
+	request.open("POST","http://localhost:8080/authenticate",true); // provide the URL
 
-    	<div id="accordion" >
-  <h3>User</h3>
-  <div>
-    <div class="tab-pane active" role="tabpanel" id="tab-1">
-                    <div class="mt-1">
-                       
-                        <span class="ml-2">Search</span><input type="text" class="ml-1" id="user-search">
-                    </div>
-                    <div class="table-responsive mt-1">
-                        <table class="table" id="user-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Username</th>
-                                    <th>Age</th>
-				    <th></th>
-				    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody id="tb">
-                                <tr>
-                                    <td>1</td>
-                                    <td><input type="text" id="uname"></td>
-				    <th><input type="text" id="mobile"></th>
-				    <th>pasi</th>
-				    <th><input type="text" id="age"></th>
-				    <th><button class="btn btn-success btn-sm">Update</button></th>
-				    <th><button class="btn btn-danger btn-sm">Delete</button></th>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-		
-<div style="min-height: 500px">
+	request.setRequestHeader('Content-type', 'application/JSON;charset=UTF-8');
+	request.send(JSON.stringify(login));
+	
+	}
 
-    <div class="starter-template">
-        <h3>Add New User</h3>
-
-            <div class="form-group form-group-lg">
-                <label class="col-sm-2 control-label">Name :</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" id="name"/>
-                </div>
-            </div>
-
-            <div class="form-group form-group-lg">
-                <label class="col-sm-2 control-label">Age :</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" id="age"/>
-                </div>
-            </div>
-
-            <div class="form-group form-group-lg">
-                <label class="col-sm-2 control-label">Username :</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" id="username"/>
-                </div>
-            </div>
-
-            <div class="form-group form-group-lg">
-                <label class="col-sm-2 control-label">Telephone :</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" id="telephone"/>
-                </div>
-            </div>
-
-            <div class="form-group form-group-lg">
-                <label class="col-sm-2 control-label">Password :</label>
-                <div class="col-sm-5">
-                    <input type="password" class="form-control" id="password"/>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button id="btn-add"
-                            class="btn btn-primary btn-lg">Add User
-                    </button>
-                </div>
-            </div>
-
-    </div>
-
-</div>
-
-		
- 
-
-  </div>
-  <h3>Product</h3>
-  <div>
-    <div class="tab-pane" role="tabpanel" id="tab-2">
-                    
-                    <span class="ml-2">Search</span><input type="text" onkeyup="productsearh();" class="ml-1" id="search2">
-                    <div class="table-responsive mt-1">
-                        <table class="table">
-                            <thead>
-                                <tr>
-								    <th>ID</th>
-                                    <th>Product Name</th>
-                                    <th>Selling Price</th>
-                                    <th>Buying Price</th>
-                                    <th>QTY</th>
-                                    <th>Description</th>
-                                    
-				    <th></th>
-				    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody id="productbody">
-                               
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-	<div style="min-height: 500px">
-
-    <div class="starter-template">
-        <h3>Add New Products</h3>
-
-            <div class="form-group form-group-lg">
-                <label class="col-sm-2 control-label">Product Name :</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" id="productname"/>
-                </div>
-            </div>
-
-            <div class="form-group form-group-lg">
-                <label class="col-sm-2 control-label">Selling Price :</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" id="sellingprice"/>
-                </div>
-            </div>
-
-            <div class="form-group form-group-lg">
-                <label class="col-sm-2 control-label">Buying Price :</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" id="buyingprice"/>
-                </div>
-            </div>
-
-            <div class="form-group form-group-lg">
-                <label class="col-sm-2 control-label">Qty :</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" id="qty"/>
-                </div>
-            </div>
-
-            <div class="form-group form-group-lg">
-                <label class="col-sm-2 control-label">Description :</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" id="discription"/>
-                </div>
-            </div>
-
-	   <div class="form-group form-group-lg">
-                <label class="col-sm-2 control-label">Category :</label>
-                <div class="col-sm-5">
-                   <select id="cattype" class="">
-				   
-				   
-				   </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button onclick="productadd();" id="bth-search"
-                            class="btn btn-primary btn-lg">Add Product
-                    </button>
-                </div>
-            </div>
-
-    </div>
-
-</div>
-
-  </div>
-  <h3>Category</h3>
-  <div >
-    		               <div   class="tab-pane" role="tabpanel" id="tab-3">
-                    <div   class="mt-1">
-                        <span class="ml-2">Search</span><input type="text"  onkeyup="categorysearh();" class="ml-1" id="searchCat">
-                         
-
-                        <div  class="table-responsive mt-1">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-				    <th></th>
-				    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody id="catabody">
-                  
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-<div style="min-height: 500px">
-
-    <div class="starter-template">
-        <h3>Add New Category</h3>
-
-            <div class="form-group form-group-lg">
-                <label class="col-sm-2 control-label">Category Name :</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" id="catname"/>
-                </div>
-            </div>
-
-            <div class="form-group form-group-lg">
-                <label class="col-sm-2 control-label">Description :</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" id="description"/>
-                </div>
-            </div>
-
-     
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button onclick="categoryadd();" id="bth-search"
-                            class="btn btn-primary btn-lg">Add Category
-                    </button>
-                </div>
-            </div>
-
-    </div>
-
-</div>
-  	</div>
-  </div>
-
-</div>
-   
-
-<script src="assets/index.js" type="text/javascript"></script>
-
-
-
+	</script>
 </body>
 
 </html>
